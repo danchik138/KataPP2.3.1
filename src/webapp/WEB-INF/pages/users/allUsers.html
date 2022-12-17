@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+    <div>
+        <table>
+            <caption>Users</caption>
+            <colgroup>
+                <col span="6" style="background:Khaki">
+            </colgroup>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Email</th>
+                <th>Gender</th>
+                <th>Age</th>
+            </tr>
+            <th:block th:each="user : ${users}">
+                <tr>
+                    <td><a th:href="@{users/{id} (id=${user.getId()})}" th:text="${user.getId()}"></a></td>
+                    <td><a th:href="@{users/{id} (id=${user.getId()})}" th:text="${user.getName()}"></a></td>
+                    <td><a th:href="@{users/{id} (id=${user.getId()})}" th:text="${user.getSurname()}"></a></td>
+                    <td><a th:href="@{users/{id} (id=${user.getId()})}" th:text="${user.getEmail()}"></a></td>
+                    <td><a th:href="@{users/{id} (id=${user.getId()})}" th:text="${user.getGender()}"></a></td>
+                    <td><a th:href="@{users/{id} (id=${user.getId()})}" th:text="${user.getAge()}"></a></td>
+                </tr>
+            </th:block>
+        </table>
+    </div>
+    <br>
+    <div>
+        <form method="POST" action="/users">
+            <fieldset>
+                <legend>Add new user</legend>
+                <p>
+                    <label for="name2">Name</label>
+                    <input name="name" type=text placeholder="name" value="24" id="name2"/>
+                </p>
+                <p>
+                    <label for="surname2">Surname</label>
+                    <input name="surname" type="text" placeholder="surname" value="Mi" id="surname2">
+                </p>
+                <p>
+                    <label for="email2">Email</label>
+                    <input name="email" type="text" placeholder="email" value="info@mil.ru" id="email2">
+                </p>
+                <p>
+                    <label for="gender2">Gender</label>
+                    <input name="gender" type="text" placeholder="gender" value="military helicopter" id="gender2">
+                </p>
+                <p>
+                    <label for="age2">Age</label>
+                    <input name="age" type="number" placeholder="age" value="40" id="age2">
+                </p>
+                <p>
+                    <input type="submit" value="Add user">
+                </p>
+            </fieldset>
+        </form>
+
+        <form method="POST" action="users/updateUser">
+            <fieldset>
+                <legend>Change user</legend>
+                <p>
+                    <label for="id">Id</label>
+                    <input name="id" type=text placeholder="id" value="1" id="id"/>
+                </p>
+                <p>
+                    <label for="name">Name</label>
+                    <input name="name" type=text placeholder="name" value="name" id="name"/>
+                </p>
+                <p>
+                    <label for="surname">Surname</label>
+                    <input name="surname" type="text" placeholder="surname" value="surname" id="surname">
+                </p>
+                <p>
+                    <label for="email">Email</label>
+                    <input name="email" type="text" placeholder="email" value="email" id="email">
+                </p>
+                <p>
+                    <label for="gender">Gender</label>
+                    <input name="gender" type="text" placeholder="gender" value="gender" id="gender">
+                </p>
+                <p>
+                    <label for="age">Age</label>
+                    <input name="age" type="number" placeholder="age" value="99" id="age">
+                </p>
+                <p>
+                    <input type="submit" value="Update user">
+                </p>
+            </fieldset>
+        </form>
+
+        <br>
+        <form method="POST" action="/users/deleteAll">
+            <button type="submit">Delete All Users</button>
+        </form>
+    </div>
+</body>
+</html>
