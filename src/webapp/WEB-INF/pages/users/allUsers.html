@@ -18,6 +18,7 @@
                 <th style="outline: thin solid">Email</th>
                 <th style="outline: thin solid">Gender</th>
                 <th style="outline: thin solid">Age</th>
+                <th style="outline: thin solid">Magic</th>
             </tr>
             <th:block th:each="user : ${users}">
                 <tr>
@@ -27,13 +28,18 @@
                     <td><a th:href="@{users/{id} (id=${user.getId()})}" th:text="${user.getEmail()}"></a></td>
                     <td><a th:href="@{users/{id} (id=${user.getId()})}" th:text="${user.getGender()}"></a></td>
                     <td><a th:href="@{users/{id} (id=${user.getId()})}" th:text="${user.getAge()}"></a></td>
+                    <td>
+                        <form th:method="DELETE" th:action="@{users/{id} (id=${user.getId()})}">
+                            <button type="submit" style="background-color: cornflowerblue">Try me</button>
+                        </form>
+                    </td>
                 </tr>
             </th:block>
         </table>
     </div>
     <br>
     <div>
-        <form th:method="POST" th:action="@{/users/createUser}" th:object="${user}">
+        <form th:method="POST" th:action="@{/users}" th:object="${user}">
             <fieldset>
                 <legend>Change user</legend>
                 <p>
@@ -63,7 +69,7 @@
         </form>
     </div>
     <div>
-        <form th:method="POST" th:action="@{/users/updateUser}" th:object="${user}">
+        <form th:method="PATCH" th:action="@{/users}" th:object="${user}">
             <fieldset>
                 <legend>Change user</legend>
                 <p>
@@ -98,8 +104,11 @@
     </div>
     <br>
     <div>
-        <form method="POST" action="/users/deleteAll">
-            <button type="submit">Delete All Users</button>
+        <form th:method="DELETE" th:action="@{/users}">
+            <fieldset>
+                <legend>Real magic</legend>
+                <button type="submit" style="background-color: red;  size: A5">Red button</button>
+            </fieldset>
         </form>
     </div>
 </body>

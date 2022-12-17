@@ -10,7 +10,6 @@ import web.service.UserService;
 @Controller
 @RequestMapping("/users")
 public class UserController {
-
     @Autowired
     UserService userService;
 
@@ -21,25 +20,27 @@ public class UserController {
         model.addAttribute("user", new User());
         return "users/allUsers";
     }
-    @PostMapping("/createUser")
+
+    @PostMapping
     public String addNewUser(@ModelAttribute("user") User user) {
+        System.out.println("post method");
         userService.addUser(user);
         return "redirect:/users";
     }
 
-    @PostMapping("/deleteAll")
-    public String deleteAllUsers() {
-        userService.deleteAllUsers();
-        System.out.println("deleted all users");
-        return "redirect:/users";
-    }
-    @PostMapping("/updateUser")
+    @PatchMapping
     public String updateUser(@ModelAttribute("user") User user) {
         User temp = userService.getUserById(user.getId());
         if (temp == null) {
             return "redirect:/users/noSuchUserFound";
         }
         userService.updateUser(user);
+        return "redirect:/users";
+    }
+
+    @DeleteMapping
+    public String deleteAllUsers() {
+        userService.deleteAllUsers();
         return "redirect:/users";
     }
 
@@ -50,7 +51,14 @@ public class UserController {
 
     @GetMapping("/{id}")
     public String deleteAllUsers(@PathVariable("id")int id, Model model){
-        model.addAttribute("users", userService.getUserById(id));
-        return "users/showUser";
+        model.addAttribute("user", userService.getUserById(id));
+        return "users/editUser";
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteAllUsers(@PathVariable("id")int id) {
+        System.out.println("delete by id");
+        userService.deleteUserById(id);
+        return "redirect:/users";
     }
 }

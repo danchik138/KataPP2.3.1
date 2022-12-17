@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User info</title>
+</head>
+<body>
+    <form th:method="PATCH" th:action="@{/users}" th:object="${user}">
+        <fieldset>
+            <legend>Change user</legend>
+            <p>
+                <label for="updateId">Id</label>
+                <input name="name" type=text th:field="*{id}" id="updateId"/>
+            </p>
+            <p>
+                <label for="updateName">Name</label>
+                <input name="surname" type="text" th:field="*{name}" id="updateName"/>
+            </p>
+            <p>
+                <label for="updateSurname">Surname</label>
+                <input name="surname" type="text" th:field="*{surname}"  id="updateSurname">
+            </p>
+            <p>
+                <label for="updateEmail">Email</label>
+                <input name="email" type="text" th:field="*{email}" id="updateEmail">
+            </p>
+            <p>
+                <label for="updateGender">Gender</label>
+                <input name="gender" type="text" th:field="*{gender}" id="updateGender">
+            </p>
+            <p>
+                <label for="updateAge">Age</label>
+                <input name="age" type="number" th:field="*{age}" id="updateAge">
+            </p>
+            <p>
+                <input type="submit" value="Update user">
+
+            </p>
+
+        </fieldset>
+    </form>
+    <br>
+    <form th:method="DELETE" th:action="@{/users/{id} (id=${user.getId()})}">
+        <button type="submit">Delete user</button>
+    </form>
+    <br>
+    <a href="/users">Return to users page</a>
+</body>
+</html>
