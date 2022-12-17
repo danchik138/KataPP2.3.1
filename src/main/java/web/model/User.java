@@ -20,6 +20,10 @@ public class User {
     @Column(name = "age")
     private int age;
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public long getId() {
         return id;
     }
@@ -65,6 +69,15 @@ public class User {
     }
 
     public User(String name, String surname, String email, String gender, int age) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.gender = gender;
+        this.age = age;
+    }
+
+    public User(long id, String name, String surname, String email, String gender, int age) {
+        this.id = id;
         this.name = name;
         this.surname = surname;
         this.email = email;

@@ -18,17 +18,13 @@ public class UserController {
     public String showAllUsers(Model model) {
         System.out.println(userService.getAllUsers());
         model.addAttribute("users", userService.getAllUsers());
+        model.addAttribute("user", new User());
         return "users/allUsers";
     }
-    @PostMapping
-    public String addNewUser(@RequestParam(name = "name", required = false) String name,
-                             @RequestParam(name = "surname", required = false) String surname,
-                             @RequestParam(name = "email", required = false) String email,
-                             @RequestParam(name = "gender", required = false) String gender,
-                             @RequestParam(name = "age", required = false) int age) {
-        System.out.println("adding new user");
-        userService.addUser(new User(name, surname, email, gender, age));
-        return "redirect:users";
+    @PostMapping("/createUser")
+    public String addNewUser(@ModelAttribute("user") User user) {
+        userService.addUser(user);
+        return "redirect:/users";
     }
 
     @PostMapping("/deleteAll")
@@ -38,21 +34,11 @@ public class UserController {
         return "redirect:/users";
     }
     @PostMapping("/updateUser")
-    public String updateUser(@RequestParam(value = "id") long id,
-                             @RequestParam(name = "name", required = false) String name,
-                             @RequestParam(name = "surname", required = false) String surname,
-                             @RequestParam(name = "email", required = false) String email,
-                             @RequestParam(name = "gender", required = false) String gender,
-                             @RequestParam(name = "age", required = false) int age) {
-        User user = userService.getUserById(id);
-        if (user == null) {
+    public String updateUser(@ModelAttribute("user") User user) {
+        User temp = userService.getUserById(user.getId());
+        if (temp == null) {
             return "redirect:/users/noSuchUserFound";
         }
-        user.setName(name);
-        user.setSurname(surname);
-        user.setAge(age);
-        user.setEmail(email);
-        user.setGender(gender);
         userService.updateUser(user);
         return "redirect:/users";
     }
@@ -64,7 +50,6 @@ public class UserController {
 
     @GetMapping("/{id}")
     public String deleteAllUsers(@PathVariable("id")int id, Model model){
-        System.out.println(userService.getUserById(id));
         model.addAttribute("users", userService.getUserById(id));
         return "users/showUser";
     }

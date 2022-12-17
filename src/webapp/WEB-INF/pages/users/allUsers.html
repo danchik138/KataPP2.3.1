@@ -12,12 +12,12 @@
                 <col span="6" style="background:Khaki">
             </colgroup>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Surname</th>
-                <th>Email</th>
-                <th>Gender</th>
-                <th>Age</th>
+                <th style="outline: thin solid">Id</th>
+                <th style="outline: thin solid">Name</th>
+                <th style="outline: thin solid">Surname</th>
+                <th style="outline: thin solid">Email</th>
+                <th style="outline: thin solid">Gender</th>
+                <th style="outline: thin solid">Age</th>
             </tr>
             <th:block th:each="user : ${users}">
                 <tr>
@@ -33,69 +33,71 @@
     </div>
     <br>
     <div>
-        <form method="POST" action="/users">
+        <form th:method="POST" th:action="@{/users/createUser}" th:object="${user}">
             <fieldset>
-                <legend>Add new user</legend>
+                <legend>Change user</legend>
                 <p>
-                    <label for="name2">Name</label>
-                    <input name="name" type=text placeholder="name" value="24" id="name2"/>
+                    <label for="createName">Name</label>
+                    <input name="name" type=text th:field="*{name}" id="createName"/>
                 </p>
                 <p>
-                    <label for="surname2">Surname</label>
-                    <input name="surname" type="text" placeholder="surname" value="Mi" id="surname2">
+                    <label for="createSurname">Surname</label>
+                    <input name="surname" type="text" th:field="*{surname}" id="createSurname">
                 </p>
                 <p>
-                    <label for="email2">Email</label>
-                    <input name="email" type="text" placeholder="email" value="info@mil.ru" id="email2">
+                    <label for="createEmail">Email</label>
+                    <input name="email" type="text" th:field="*{email}" id="createEmail">
                 </p>
                 <p>
-                    <label for="gender2">Gender</label>
-                    <input name="gender" type="text" placeholder="gender" value="military helicopter" id="gender2">
+                    <label for="createGender">Gender</label>
+                    <input name="gender" type="text" th:field="*{gender}" id="createGender">
                 </p>
                 <p>
-                    <label for="age2">Age</label>
-                    <input name="age" type="number" placeholder="age" value="40" id="age2">
+                    <label for="createAge">Age</label>
+                    <input name="age" type="number" th:field="*{age}" id="createAge">
                 </p>
                 <p>
                     <input type="submit" value="Add user">
                 </p>
             </fieldset>
         </form>
-
-        <form method="POST" action="users/updateUser">
+    </div>
+    <div>
+        <form th:method="POST" th:action="@{/users/updateUser}" th:object="${user}">
             <fieldset>
                 <legend>Change user</legend>
                 <p>
-                    <label for="id">Id</label>
-                    <input name="id" type=text placeholder="id" value="1" id="id"/>
+                    <label for="updateId">Id</label>
+                    <input name="name" type=text th:field="*{id}" id="updateId"/>
                 </p>
                 <p>
-                    <label for="name">Name</label>
-                    <input name="name" type=text placeholder="name" value="name" id="name"/>
+                    <label for="updateName">Name</label>
+                    <input name="surname" type="text" th:field="*{name}" id="updateName"/>
                 </p>
                 <p>
-                    <label for="surname">Surname</label>
-                    <input name="surname" type="text" placeholder="surname" value="surname" id="surname">
+                    <label for="updateSurname">Surname</label>
+                    <input name="surname" type="text" th:field="*{surname}"  id="updateSurname">
                 </p>
                 <p>
-                    <label for="email">Email</label>
-                    <input name="email" type="text" placeholder="email" value="email" id="email">
+                    <label for="updateEmail">Email</label>
+                    <input name="email" type="text" th:field="*{email}" id="updateEmail">
                 </p>
                 <p>
-                    <label for="gender">Gender</label>
-                    <input name="gender" type="text" placeholder="gender" value="gender" id="gender">
+                    <label for="updateGender">Gender</label>
+                    <input name="gender" type="text" th:field="*{gender}" id="updateGender">
                 </p>
                 <p>
-                    <label for="age">Age</label>
-                    <input name="age" type="number" placeholder="age" value="99" id="age">
+                    <label for="updateAge">Age</label>
+                    <input name="age" type="number" th:field="*{age}" id="updateAge">
                 </p>
                 <p>
                     <input type="submit" value="Update user">
                 </p>
             </fieldset>
         </form>
-
-        <br>
+    </div>
+    <br>
+    <div>
         <form method="POST" action="/users/deleteAll">
             <button type="submit">Delete All Users</button>
         </form>
