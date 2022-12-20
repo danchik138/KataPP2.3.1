@@ -21,8 +21,12 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @ComponentScan("web")
 public class AppConfig {
 
-    @Autowired
     private Environment environment;
+
+    @Autowired
+    public void setEnvironment(Environment environment) {
+        this.environment = environment;
+    }
 
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() {

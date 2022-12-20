@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
     <title></title>
 </head>
 <body>
@@ -30,7 +30,7 @@
                     <td><a th:href="@{users/{id} (id=${user.getId()})}" th:text="${user.getAge()}"></a></td>
                     <td>
                         <form th:method="DELETE" th:action="@{users/{id} (id=${user.getId()})}">
-                            <button type="submit" style="background-color: cornflowerblue">Try me</button>
+                            <button type="submit" style="background-color: cornflowerblue">Delete</button>
                         </form>
                     </td>
                 </tr>
@@ -106,8 +106,8 @@
     <div>
         <form th:method="DELETE" th:action="@{/users}">
             <fieldset>
-                <legend>Real magic</legend>
-                <button type="submit" style="background-color: red;  size: A5">Red button</button>
+                <legend>Delete all users</legend>
+                <button type="submit" style="background-color: red;  size: A5">Delete</button>
             </fieldset>
         </form>
     </div>

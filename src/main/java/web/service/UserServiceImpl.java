@@ -9,8 +9,12 @@ import web.model.User;
 import java.util.List;
 @Service
 public class UserServiceImpl implements UserService{
-    @Autowired
     private UserDao userDao;
+
+    @Autowired
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     @Transactional
     @Override

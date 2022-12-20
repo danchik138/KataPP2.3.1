@@ -10,8 +10,12 @@ import web.service.UserService;
 @Controller
 @RequestMapping("/users")
 public class UserController {
+    private UserService userService;
+
     @Autowired
-    UserService userService;
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping
     public String showAllUsers(Model model) {
@@ -23,7 +27,7 @@ public class UserController {
 
     @PostMapping
     public String addNewUser(@ModelAttribute("user") User user) {
-        System.out.println("post method");
+        System.out.println("post method " + user.getName());
         userService.addUser(user);
         return "redirect:/users";
     }
@@ -32,7 +36,7 @@ public class UserController {
     public String updateUser(@ModelAttribute("user") User user) {
         User temp = userService.getUserById(user.getId());
         if (temp == null) {
-            return "redirect:/users/noSuchUserFound";
+            return "/users/noSuchUserFound";
         }
         userService.updateUser(user);
         return "redirect:/users";
@@ -42,11 +46,6 @@ public class UserController {
     public String deleteAllUsers() {
         userService.deleteAllUsers();
         return "redirect:/users";
-    }
-
-    @GetMapping("/noSuchUserFound")
-    public String noSuchUserFound(){
-        return "users/noSuchUserFound";
     }
 
     @GetMapping("/{id}")
