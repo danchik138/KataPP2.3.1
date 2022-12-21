@@ -1,16 +1,13 @@
 <!DOCTYPE HTML>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
+    <meta charset="UTF-8">
     <title></title>
 </head>
 <body>
     <div>
         <table>
             <caption>Users</caption>
-            <colgroup>
-                <col span="6" style="background:Khaki">
-            </colgroup>
             <tr>
                 <th style="outline: thin solid">Id</th>
                 <th style="outline: thin solid">Name</th>
@@ -18,7 +15,7 @@
                 <th style="outline: thin solid">Email</th>
                 <th style="outline: thin solid">Gender</th>
                 <th style="outline: thin solid">Age</th>
-                <th style="outline: thin solid">Magic</th>
+                <th style="outline: thin solid">Delete</th>
             </tr>
             <th:block th:each="user : ${users}">
                 <tr>
@@ -30,7 +27,7 @@
                     <td><a th:href="@{users/{id} (id=${user.getId()})}" th:text="${user.getAge()}"></a></td>
                     <td>
                         <form th:method="DELETE" th:action="@{users/{id} (id=${user.getId()})}">
-                            <button type="submit" style="background-color: cornflowerblue">Delete</button>
+                            <button type="submit">Delete user</button>
                         </form>
                     </td>
                 </tr>
@@ -41,7 +38,7 @@
     <div>
         <form th:method="POST" th:action="@{/users}" th:object="${user}">
             <fieldset>
-                <legend>Change user</legend>
+                <legend>Add user</legend>
                 <p>
                     <label for="createName">Name</label>
                     <input name="name" type=text th:field="*{name}" id="createName"/>
@@ -68,8 +65,9 @@
             </fieldset>
         </form>
     </div>
+    <br>
     <div>
-        <form th:method="PATCH" th:action="@{/users}" th:object="${user}">
+        <form th:method="PATCH" th:action="@{/users/{id} (id=${user.getId()})}" th:object="${user}">
             <fieldset>
                 <legend>Change user</legend>
                 <p>
@@ -107,7 +105,7 @@
         <form th:method="DELETE" th:action="@{/users}">
             <fieldset>
                 <legend>Delete all users</legend>
-                <button type="submit" style="background-color: red;  size: A5">Delete</button>
+                <button type="submit">Delete</button>
             </fieldset>
         </form>
     </div>
